@@ -1,35 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agraton <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/07/23 12:01:04 by agraton           #+#    #+#             */
-/*   Updated: 2018/09/08 18:21:18 by agraton          ###   ########.fr       */
+/*   Created: 2018/09/08 17:02:56 by agraton           #+#    #+#             */
+/*   Updated: 2018/09/08 18:20:52 by agraton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "get_next_line.h"
+#ifndef get_next_line_h
+# define get_next_line_h
 
-int			main(int argc, char **argv)
-{
-	int		fd;
-	char	*str;
+# include <unistd.h>
+# include <stdlib.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <fcntl.h>
+# define BUFF_SIZE 32
 
-	argc = argv[1][1];
-	if (!(str = (char *)malloc(sizeof(char) * 20)))
-		return (0);
-	fd = open(argv[1], O_RDONLY);
-	read(fd, str, 20);
-	int i;
-	i = -1;
-	while (++i < 20)
-	{
-		if (str[i] == '\0')
-			write(1, ".\\0.", 4);
-		else
-			write(1, &str[i], 1);
-	}
-	return (0);
-}
+int			get_next_line(const int fd, char **line);
+
+#endif

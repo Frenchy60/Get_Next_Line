@@ -6,24 +6,18 @@
 /*   By: agraton <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/23 12:01:48 by agraton           #+#    #+#             */
-/*   Updated: 2018/07/24 12:58:52 by agraton          ###   ########.fr       */
+/*   Updated: 2018/09/08 18:20:54 by agraton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdlib.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
+#include "get_next_line.h"
 
-int			get_next_line(const int fd, char **line)
+int					get_next_line(const int fd, char **line)
 {
-	char	c;
+	static	char	*buffer = NULL;
 
-	line = NULL;
-	if (read(fd, &c, 1))
-		write(1, &c, 1);
-	else
-		return (1);
-	return (0);
+	if (!buffer && !(buffer = (char *)malloc(sizeof(char) * BUFF_SIZE + 1)))
+		return (-1);
+	if (0 > read(fd, buffer, BUFF_SIZE))
+		return (-1);
 }
