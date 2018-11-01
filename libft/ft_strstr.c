@@ -1,26 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: agraton <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/23 12:33:23 by agraton           #+#    #+#             */
-/*   Updated: 2018/11/01 16:56:02 by agraton          ###   ########.fr       */
+/*   Created: 2018/06/18 10:09:42 by agraton           #+#    #+#             */
+/*   Updated: 2018/06/18 10:12:10 by agraton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include <string.h>
 
-# include "libft.h"
-# include <unistd.h>
-# include <stdlib.h>
-# include <sys/types.h>
-# include <sys/stat.h>
-# include <fcntl.h>
-# define BUFF_SIZE 32
+char			*ft_strstr(char *s1, char *s2)
+{
+	size_t		i;
 
-int			get_next_line(const int fd, char **line);
-
-#endif
+	if (!*s2)
+		return (s1);
+	while (*s1)
+	{
+		i = 0;
+		while (s1[i] == s2[i] && s2[i] != '\0')
+			i++;
+		if (s2[i] == '\0')
+			return (s1);
+		s1++;
+	}
+	return (0);
+}
